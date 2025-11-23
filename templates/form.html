@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Check cryptocurrency prices</h2>
+
+  <form method="POST">
+    {{ form.hidden_tag() }}
+
+    <div class="form-field">
+      {{ form.coin.label }}<br>
+      {{ form.coin() }}
+      {% for error in form.coin.errors %}
+        <span class="error">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <div class="form-field">
+      {{ form.currency.label }}<br>
+      {{ form.currency() }}
+      {% for error in form.currency.errors %}
+        <span class="error">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <div class="form-field">
+      {{ form.days.label }}<br>
+      {{ form.days() }}
+      {% for error in form.days.errors %}
+        <span class="error">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <div class="form-field">
+      {{ form.submit() }}
+    </div>
+  </form>
+{% endblock %}

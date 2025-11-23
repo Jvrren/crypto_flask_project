@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Price results</h2>
+
+  {% if error %}
+    <p class="error">{{ error }}</p>
+  {% elif crypto_data %}
+    <p>
+      Cryptocurrency: <strong>{{ crypto_data.coin_id|capitalize }}</strong><br>
+      Currency: <strong>{{ crypto_data.currency }}</strong><br>
+      Current price: <strong>{{ crypto_data.current_price }} {{ crypto_data.currency }}</strong><br>
+      {% if crypto_data.change_24h is not none %}
+        24h change: <strong>{{ crypto_data.change_24h }}%</strong><br>
+      {% endif %}
+      Period ({{ crypto_data.days }} days) change:
+      <strong>{{ crypto_data.period_change_pct }}%</strong><br>
+      Min price: <strong>{{ crypto_data.min_price }}</strong><br>
+      Max price: <strong>{{ crypto_data.max_price }}</strong><br>
+      Average price: <strong>{{ crypto_data.avg_price }}</strong><br>
+      {% if crypto_data.last_updated %}
+        Last updated: <strong>{{ crypto_data.last_updated }}</strong>
+      {% endif %}
+    </p>
+
+    <h3>Price history ({{ crypto_data.days }} days)</h3>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Date &amp; Time</th>
+          <th>Price ({{ crypto_data.currency }})</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in crypto_data.history %}
+          <tr>
+            <td>{{ row.datetime }}</td>
+            <td>{{ row.price }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <p><a href="{{ url_for('index') }}">Check another coin</a></p>
+  {% else %}
+    <p>No data to display.</p>
+  {% endif %}
+{% endblock %}
