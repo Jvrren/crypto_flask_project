@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crypto Price Checker</title>
+</head>
+<body>
+    <h1>Simple Crypto Price Checker</h1>
+
+    <form action="/price" method="POST">
+        <label>Crypto Symbol (BTC, ETH, etc):</label>
+        <input type="text" name="crypto" required>
+
+        <br><br>
+
+        <label>Select Currency:</label>
+        <select name="currency">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+        </select>
+
+        <br><br>
+
+        <label>Show Timestamp?</label>
+        <input type="checkbox" name="include_time" value="yes">
+
+        <br><br>
+
+        <button type="submit">Check Price</button>
+    </form>
+</body>
+</html>
