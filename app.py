@@ -5,27 +5,27 @@ import requests
 
 app = Flask(__name__)
 
-# Home page with form
+
 @app.route("/")
 def index():
     return render_template("index.html")
 
-# Form submission route
+
 @app.route("/price", methods=["POST"])
 def price():
-    # Get user inputs
+    
     crypto = request.form.get("crypto")
     currency = request.form.get("currency")
     include_time = request.form.get("include_time")
 
-    # Build API URL
+    
     api_url = f"https://api.coinbase.com/v2/prices/{crypto}-{currency}/spot"
 
-    # Fetch data
+    
     response = requests.get(api_url)
     data = response.json()
 
-    # Process data
+    
     if "data" in data:
         price = data["data"]["amount"]
     else:
